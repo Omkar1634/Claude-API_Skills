@@ -135,34 +135,7 @@ Claude keeps full context of the generated project throughout the conversation.
 
 ---
 
-## Known Issues & Fixes
 
-### Python — passlib broken on Python 3.12+
-If you're on Python 3.12 or above and see:
-```
-ValueError: password cannot be longer than 72 bytes
-```
-This is a known passlib bug. Fix: replace `passlib` with `bcrypt` directly in your project.
-See `references/python-compatibility.md` for the exact code.
-
-### Python — email-validator not installed
-If you see `ImportError: email-validator is not installed`, run:
-```cmd
-pip install email-validator
-```
-Then restart the server.
-
----
-
-| Version | What Changed |
-|---------|-------------|
-| v0.4.0 | White/black button style — fully visible on all displays |
-| v0.3.0 | Generation via sendPrompt() — no CORS issues, works everywhere |
-| v0.2.0 | Interactive wizard artifact replaces conversational Q&A |
-| v0.1.1 | YAML frontmatter, mid-project branch, language→framework mapping |
-| v0.1.0 | Initial release — 7-phase conversational flow |
-
-See [CHANGELOG.md](./CHANGELOG.md) for full details.
 
 ---
 
