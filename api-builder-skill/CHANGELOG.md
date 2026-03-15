@@ -9,6 +9,24 @@ Versioning follows [Semantic Versioning](https://semver.org/):
 
 ---
 
+## [v0.4.1] — 2026-03-15
+
+### Added
+- references/python-compatibility.md — Python-specific compatibility notes covering passlib/bcrypt issue on Python 3.12+ and missing email-validator package
+- SKILL.md language-specific reference table — Claude now loads the relevant reference file based on the user's chosen language, so fixes are only applied to the right language
+- README known issues section — passlib fix and email-validator fix documented for users
+
+### Changed
+- Python bcrypt fix moved OUT of core SKILL.md rules into references/python-compatibility.md — correct place for a language-specific fix
+- Skill now scales to any language without polluting core rules with language-specific code
+
+### Why
+- The passlib fix was incorrectly added to the core SKILL.md which applies to ALL languages
+- A C# or Go user would never use passlib — that fix had no business being in the core rules
+- Language-specific issues belong in language-specific reference files that Claude only loads when relevant
+
+---
+
 ## [v0.4.0] — 2026-03-15
 
 ### Changed

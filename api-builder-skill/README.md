@@ -135,7 +135,24 @@ Claude keeps full context of the generated project throughout the conversation.
 
 ---
 
-## Version History
+## Known Issues & Fixes
+
+### Python — passlib broken on Python 3.12+
+If you're on Python 3.12 or above and see:
+```
+ValueError: password cannot be longer than 72 bytes
+```
+This is a known passlib bug. Fix: replace `passlib` with `bcrypt` directly in your project.
+See `references/python-compatibility.md` for the exact code.
+
+### Python — email-validator not installed
+If you see `ImportError: email-validator is not installed`, run:
+```cmd
+pip install email-validator
+```
+Then restart the server.
+
+---
 
 | Version | What Changed |
 |---------|-------------|
