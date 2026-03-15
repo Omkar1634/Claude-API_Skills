@@ -9,6 +9,20 @@ Versioning follows [Semantic Versioning](https://semver.org/):
 
 ---
 
+## [v0.4.0] — 2026-03-15
+
+### Changed
+- Back button: white background, black text, black border — fully visible, clearly secondary by size (smaller padding)
+- Continue button: white background, black text, black border — fully visible, dominant by size (larger padding + bold)
+- Generate button: white background, black text, thick 3px black border — largest element on confirm screen
+- All three buttons now work on both dark and light displays with no visibility issues
+
+### Why
+- Purple glow buttons were hard to see for some users
+- White/black is maximum contrast — readable in any environment
+
+---
+
 ## [v0.3.0] — 2026-03-15
 
 ### Added
