@@ -9,6 +9,37 @@ Versioning follows [Semantic Versioning](https://semver.org/):
 
 ---
 
+## [v0.2.0] — 2026-03-15
+
+### Added
+- Interactive wizard artifact replacing conversational Q&A flow
+- Clickable option cards for language, framework, database, auth, features
+- Framework options dynamically shown based on selected language
+- Pre-selected feature suggestions based on project context rules
+- Folder structure shown before any file content
+- View and Download buttons per generated file
+- Download all button for complete project
+- Claude API integration for accurate code generation
+- Mid-project flow (Branch 1C) handled in artifact Step 1
+
+### Removed
+- Experience level question (removed per user feedback)
+- Inline code dumps in chat — replaced with view/download artifact UI
+- Conversational one-question-at-a-time flow — replaced with wizard artifact
+
+### Changed
+- Delivery method changed from Approach B inline text to interactive artifact with API calls
+- SKILL.md description updated to reflect artifact launch on trigger
+- Version bumped to v0.2.0 (minor — significant UX change)
+
+### Why
+- User testing showed conversational flow was slow and error-prone
+- Clickable options prevent invalid inputs (e.g. typos in framework names)
+- Artifact with API call produces more accurate, token-powered results
+- View/download UX is cleaner than scrolling through long code blocks in chat
+
+---
+
 ## [v0.1.1] — 2026-03-15
 
 ### Added
