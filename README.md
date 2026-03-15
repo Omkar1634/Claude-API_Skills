@@ -135,10 +135,3 @@ Claude keeps full context of the generated project throughout the conversation.
 
 ---
 
-
-
----
-
-## Current Version
-
-**v0.4.0** — See [CHANGELOG.md](./CHANGELOG.md) for full history.
