@@ -9,6 +9,26 @@ Versioning follows [Semantic Versioning](https://semver.org/):
 
 ---
 
+## [v0.1.1] — 2026-03-15
+
+### Added
+- YAML frontmatter (`name:` and `description:`) at top of SKILL.md — required for Claude to auto-trigger the skill
+- Phase 1 Branch C — mid-project handling (e.g. user has a frontend but empty backend). Claude acknowledges existing context and proceeds without asking for non-existent code
+- Phase 3 language-to-framework mapping table — concrete suggestions per language (Python, JS, TS, C#, Java, Go, PHP, Ruby)
+- Phase 4 concrete feature suggestion rules — decision table mapping project context to pre-suggested features
+- Phase 6 full layered folder structure matching the designed architecture (`app/api/v1/endpoints/`, `app/core/`, `app/services/`, `app/db/`, `app/models/`, `app/schemas/`, `tests/`)
+- TESTING.md — mid-project scenario test cases
+- TESTING.md — unsupported language test cases (C#, Go, Ruby etc.)
+
+### Changed
+- Phase 6 output changed from flat file list to proper layered FastAPI project structure
+- Phase 4 feature suggestion changed from vague "suggest based on description" to explicit rule-based logic
+
+### Why
+Review of v0.1.0 identified: missing YAML frontmatter (skill would never auto-trigger), missing mid-project branch (the most common real-world scenario), vague framework suggestion logic, flat folder structure not matching the designed architecture, and incomplete test cases.
+
+---
+
 ## [v0.1.0] — 2026-03-15
 
 ### Added

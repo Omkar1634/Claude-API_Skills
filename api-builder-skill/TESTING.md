@@ -22,11 +22,13 @@ Open a fresh conversation with Claude and activate the skill. Work through each 
 
 ---
 
-### Phase 1 — Scratch vs. Existing
+### Phase 1 — Scratch vs. Existing vs. Mid-Project
 
 - [ ] Claude asks whether the user is starting from scratch or has an existing project
 - [ ] "Scratch" path proceeds directly to Phase 2 without asking for code
 - [ ] "Existing" path triggers Phase 1B flow
+- [ ] "Mid-project" path (e.g. "I have a frontend but empty backend") is handled correctly — Claude acknowledges what exists, asks what the API needs to do, and proceeds to Phase 2 without asking for existing code
+- [ ] Claude references the existing frontend/context when making suggestions (e.g. CORS, matching data shape)
 
 ---
 
@@ -63,12 +65,14 @@ Open a fresh conversation with Claude and activate the skill. Work through each 
 
 ---
 
-### Unsupported Framework Handling
+### Unsupported Framework / Language Handling
 
-- [ ] If user picks an unsupported language or framework, Claude does not crash or refuse
-- [ ] Claude informs the user the framework is outside v1 scope
+- [ ] If user picks an unsupported language (e.g. C#, Go, Ruby), Claude does not crash or refuse
+- [ ] Claude informs the user the language/framework is outside v1 scope
 - [ ] Claude offers to continue with a general structure or switch to a supported option
 - [ ] Claude does not assume FastAPI if user picks something else
+- [ ] If user picks a supported language (Python) but unsupported framework (Flask), Claude handles gracefully
+- [ ] Claude never makes the user feel bad for picking an unsupported option
 
 ---
 
