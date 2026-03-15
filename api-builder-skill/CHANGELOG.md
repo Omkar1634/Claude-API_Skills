@@ -9,6 +9,33 @@ Versioning follows [Semantic Versioning](https://semver.org/):
 
 ---
 
+## [v0.3.0] — 2026-03-15
+
+### Added
+- Button visual hierarchy — Continue is bright purple with glow, Back is ghost/muted, Generate is full-width green. Users can no longer confuse which to click.
+- sendPrompt() generation — wizard sends full config to Claude in chat instead of calling Anthropic API directly. No CORS issues, no external API calls, works everywhere.
+
+### Fixed
+- CORS error on generation — was calling api.anthropic.com directly from artifact sandbox (blocked). Now uses sendPrompt() to pass config to Claude who generates inline.
+- Back button was same visual weight as Continue — now clearly secondary (ghost style).
+
+### Removed
+- Direct Anthropic API fetch from artifact — replaced with sendPrompt() approach.
+- View/Download file buttons from artifact — generation now happens in Claude chat where files can be copied directly.
+
+### Changed
+- Generation model changed from artifact-renders-output to wizard-collects-config + Claude-generates-in-chat
+- Works identically in claude.ai browser, mobile app, and Claude Code terminal — no new windows opened
+- SKILL.md description updated to reflect sendPrompt approach
+
+### Why
+- Direct API calls from artifacts are blocked by CORS in claude.ai sandbox
+- sendPrompt() is the correct pattern for artifact-to-Claude communication
+- In-chat generation keeps full conversation context — Claude can answer follow-up questions about the generated code immediately
+- Clearer button hierarchy reduces user confusion about which button to click
+
+---
+
 ## [v0.2.0] — 2026-03-15
 
 ### Added
