@@ -9,6 +9,20 @@ Versioning follows [Semantic Versioning](https://semver.org/):
 
 ---
 
+## [v0.4.2] — 2026-03-15
+
+### Removed
+- references/ folder — removed entirely to keep the skill clean and simple
+- Language-specific reference table from SKILL.md
+- Known issues section from README
+
+### Why
+- Skill is designed to be language-agnostic at the core level
+- References folder added unnecessary complexity before public release
+- Clean and simple is better for sharing with others
+
+---
+
 ## [v0.4.1] — 2026-03-15
 
 ### Added
