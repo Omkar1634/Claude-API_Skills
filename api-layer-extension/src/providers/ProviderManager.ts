@@ -49,14 +49,46 @@ export class ProviderManager {
   }
 
   private async setupApiKey(provider: ProviderName): Promise<void> {
-    const labels: Record<string, string> = {
-      claude:  'Anthropic API key (from console.anthropic.com)',
-      chatgpt: 'OpenAI API key (from platform.openai.com)',
-      gemini:  'Google AI API key (from aistudio.google.com)',
+    const providerInfo: Record<string, { label: string; url: string; keyLabel: string; instructions: string }> = {
+      claude: {
+        label: 'Claude — Anthropic',
+        url: 'https://console.anthropic.com/settings/keys',
+        keyLabel: 'Anthropic API Key',
+        instructions: 'Sign in → API Keys → Create Key → Copy it',
+      },
+      chatgpt: {
+        label: 'ChatGPT — OpenAI',
+        url: 'https://platform.openai.com/api-keys',
+        keyLabel: 'OpenAI API Key',
+        instructions: 'Sign in → API Keys → Create new secret key → Copy it',
+      },
+      gemini: {
+        label: 'Gemini — Google AI',
+        url: 'https://aistudio.google.com/app/apikey',
+        keyLabel: 'Google AI API Key',
+        instructions: 'Sign in → Create API Key → Copy it',
+      },
     };
 
+    const info = providerInfo[provider];
+
+    // Step 1 — Tell the user what we're about to do
+    const action = await vscode.window.showInformationMessage(
+      `API Layer: To use ${info.label}, you need an API key from their website. We'll open it for you now.`,
+      { modal: true },
+      'Open Website',
+      'Cancel'
+    );
+
+    if (action !== 'Open Website') { return; }
+
+    // Step 2 — Open the official API key page in their browser
+    await vscode.env.openExternal(vscode.Uri.parse(info.url));
+
+    // Step 3 — Give them time to get the key, then ask them to paste it
     const key = await vscode.window.showInputBox({
-      title: `API Layer — ${labels[provider]}`,
+      title: `API Layer — Paste your ${info.keyLabel}`,
+      prompt: info.instructions,
       placeHolder: 'Paste your API key here',
       password: true,
       ignoreFocusOut: true,
@@ -64,7 +96,7 @@ export class ProviderManager {
 
     if (key) {
       await this.context.secrets.store(`apiLayer.${provider}.key`, key);
-      vscode.window.showInformationMessage(`API Layer: ${provider} connected successfully.`);
+      vscode.window.showInformationMessage(`API Layer: ${info.label} connected ✓`);
     }
   }
 
