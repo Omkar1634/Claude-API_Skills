@@ -158,15 +158,18 @@ export class ProviderManager {
 
     switch (provider) {
       case 'claude': {
-        const key = await this.context.secrets.get('apiLayer.claude.key') || '';
+        const key = await this.getOrSetupKey('claude');
+        if (!key) { throw new Error('No API key for Claude. Run "API Layer: Change AI Provider" to set it up.'); }
         return new ClaudeAdapter(key);
       }
       case 'chatgpt': {
-        const key = await this.context.secrets.get('apiLayer.chatgpt.key') || '';
+        const key = await this.getOrSetupKey('chatgpt');
+        if (!key) { throw new Error('No API key for ChatGPT. Run "API Layer: Change AI Provider" to set it up.'); }
         return new ChatGPTAdapter(key);
       }
       case 'gemini': {
-        const key = await this.context.secrets.get('apiLayer.gemini.key') || '';
+        const key = await this.getOrSetupKey('gemini');
+        if (!key) { throw new Error('No API key for Gemini. Run "API Layer: Change AI Provider" to set it up.'); }
         return new GeminiAdapter(key);
       }
       case 'ollama': {
@@ -175,6 +178,24 @@ export class ProviderManager {
         return new OllamaAdapter(url, model);
       }
     }
+  }
+
+  private async getOrSetupKey(provider: ProviderName): Promise<string | undefined> {
+    const existing = await this.context.secrets.get(`apiLayer.${provider}.key`);
+
+    // Key exists and is non-empty — use it
+    if (existing && existing.trim().length > 0) {
+      return existing;
+    }
+
+    // No key or empty — clear stale value and trigger setup
+    await this.context.secrets.delete(`apiLayer.${provider}.key`);
+    vscode.window.showWarningMessage(
+      `API Layer: No API key found for ${provider}. Let's set it up now.`
+    );
+    await this.setupApiKey(provider);
+
+    return await this.context.secrets.get(`apiLayer.${provider}.key`);
   }
 
   async testConnection(): Promise<void> {
